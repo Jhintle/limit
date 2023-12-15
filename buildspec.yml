@@ -7,7 +7,7 @@ phases:
       - aws_account_id=`aws sts get-caller-identity --query Account | jq -r . `
       - docker login -u AWS -p $(aws ecr get-login-password --region ${AWS_REGION}) ${aws_account_id}.dkr.ecr.${AWS_REGION}.amazonaws.com
       - aws_ecr_repository_uri=`aws ecr describe-repositories --repository-names ${AWS_ECR_REPOSITORY_NAME} | jq -r '.repositories[0].repositoryUri'`
-      - docker build . -t  ${aws_ecr_repository_uri}
+      - docker build . -t udacity-repos
       - docker push 658761620615.dkr.ecr.us-east-1.amazonaws.com/udacity-repos:latest
   post_build:
     commands:
